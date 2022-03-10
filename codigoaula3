@@ -1,4 +1,5 @@
-
+#Arquivo para aula 4
+#https://colab.research.google.com/drive/1usoethFG-sgj4aD-7i9Zv-Z9grimfXqt?usp=sharing
 # Configuração Básica para utilizar o OpenCV no Notebook Colab Google
 # Baixe a imagem de teste e os arquivos utils
 !wget --no-check-certificate \
