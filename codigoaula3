@@ -26,3 +26,5 @@ b,g,r=cv2.split(teste)
 print(teste.shape[0])
 print(teste.shape[1])
 print(teste.shape[2])
+(k,l,m)=teste[50,250]
+print('red' + k)
