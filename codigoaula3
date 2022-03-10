@@ -1,0 +1,28 @@
+
+# Configuração Básica para utilizar o OpenCV no Notebook Colab Google
+# Baixe a imagem de teste e os arquivos utils
+!wget --no-check-certificate \
+    https://github.com/maxfabiano/processamento-de-imagens/blob/main/thumb-1920-575608.jpg?raw=true \
+    -O foto2.jpg
+
+!wget --no-check-certificate \
+    https://raw.githubusercontent.com/maxbassoul/opencv-learning/main/common.py \
+    -O common.py
+
+# Essas importações permitem que você use o opencv
+import cv2 #opencv itself
+import common #some useful opencv functions
+import numpy as np # matrix manipulations
+
+# o seguinte tem a ver com este código de notebook interativo
+%matplotlib inline 
+from matplotlib import pyplot as plt # isso permite que você desenhe imagens em linha nos blocos de anotações
+import pylab # isso permite que você controle o tamanho da figura
+pylab.rcParams['figure.figsize'] = (10.0, 8.0) # isso controla o tamanho da figura no notebook
+
+teste = cv2.imread('foto2.jpg')
+plt.imshow(teste)
+b,g,r=cv2.split(teste)
+print(teste.shape[0])
+print(teste.shape[1])
+print(teste.shape[2])
