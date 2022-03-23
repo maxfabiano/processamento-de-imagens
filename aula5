@@ -1,0 +1,43 @@
+#Arquivo para aula 4
+#https://colab.research.google.com/drive/1usoethFG-sgj4aD-7i9Zv-Z9grimfXqt?usp=sharing
+# Configuração Básica para utilizar o OpenCV no Notebook Colab Google
+# Baixe a imagem de teste e os arquivos utils
+!wget --no-check-certificate \
+    https://github.com/maxfabiano/processamento-de-imagens/blob/main/Highimgnoise.jpg?raw=true \
+    -O foto2.jpg
+
+!wget --no-check-certificate \
+    https://raw.githubusercontent.com/maxbassoul/opencv-learning/main/common.py \
+    -O common.py
+
+# Essas importações permitem que você use o opencv
+import cv2 #opencv itself
+import common #some useful opencv functions
+import numpy as np # matrix manipulations
+import matplotlib.pyplot as plt
+
+# o seguinte tem a ver com este código de notebook interativo
+%matplotlib inline 
+from matplotlib import pyplot as plt # isso permite que você desenhe imagens em linha nos blocos de anotações
+import pylab # isso permite que você controle o tamanho da figura
+pylab.rcParams['figure.figsize'] = (10.0, 8.0) # isso controla o tamanho da figura no notebook
+
+pic = cv2.imread('foto2.jpg')
+img2gray = cv2.cvtColor(pic, cv2.COLOR_RGB2GRAY)
+
+# Remove hair with closing and blur
+kernel = cv2.getStructuringElement(cv2.MORPH_CROSS,(10,10))
+closing = cv2.morphologyEx(img2gray, cv2.MORPH_CLOSE, kernel)
+closing = cv2.GaussianBlur(closing, (5, 5), 0)
+
+# Thresholding for the skin patches
+_,threshold = cv2.threshold(closing, 127, 255, cv2.THRESH_BINARY)
+
+img = cv2.imread('foto2.jpg') 
+dst = cv2.fastNlMeansDenoisingColored(img, None, 10, 10, 7, 15) 
+plt.subplot(121), plt.imshow(img) 
+plt.subplot(122), plt.imshow(dst) 
+  
+plt.show() 
+
+
